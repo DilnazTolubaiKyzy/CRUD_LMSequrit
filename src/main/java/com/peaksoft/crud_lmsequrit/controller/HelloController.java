@@ -26,7 +26,7 @@ public class HelloController {
     @GetMapping("/profile")
     public String profile(HttpServletRequest request, Model model){
         Principal principal = request.getUserPrincipal();
-        model.addAttribute("user",userService.getUserByUserName(principal.getName()));
+        model.addAttribute("user",userService.getUserByEmail(principal.getName()));
         return "profile";
     }
 }

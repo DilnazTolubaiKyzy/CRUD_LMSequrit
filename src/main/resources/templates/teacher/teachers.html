@@ -98,6 +98,20 @@
             color: #444444;
             text-shadow: none;
         }
+        .login {
+            display: inline-block;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            user-select: none;
+            padding: .5em 2em;
+            outline: none;
+            border: 2px solid;
+            border-radius: 1px;
+            transition: 0.2s;
+        }
+        .login:hover { background: rgba(255,255,255,.2); }
+        .login:active { background: white; }
     </style>
 </head>
 <body>
@@ -116,7 +130,7 @@
         <th scope="col">Course name</th>
         <th scope="col">Students</th>
         <th scope="col">Update</th>
-        <th scope="col">Delete</th>
+        <th scope="col" >Delete</th>
 
     </tr>
     </thead>
@@ -139,6 +153,7 @@
   <button class="btn btn-primary" type="button" disabled>add teacher</button>
 </span></a>
 <p>      <a class="hello" href="/teachers/hello" > </a >       </p>
+<p>  <a class="login" href="/login" > log out</a > </p>
 <section class="header-content">
     <a class="company" href="/companies"><button  type="button" >Companies</button></a>
     <a class="course" href="/courses"><button  type="button" >Courses</button></a>

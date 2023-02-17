@@ -29,8 +29,6 @@ public class CompanyServiceImpl implements CompanyService {
      Company company1 = companyRepository.getById(id);
      company1.setCompanyName(company.getCompanyName());
      company1.setLocatedCountry(company.getLocatedCountry());
-     company1.setCourses(company.getCourses());
-     company1.setStudents(company.getStudents());
      companyRepository.save(company1);
     }
 

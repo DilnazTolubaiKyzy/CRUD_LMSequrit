@@ -382,6 +382,20 @@
         transform: translate(95vw,90vh);
         transform: translate(95vw,90vh);
     }
+    .login {
+        display: inline-block;
+        color: white;
+        font-weight: 700;
+        text-decoration: none;
+        user-select: none;
+        padding: .5em 2em;
+        outline: none;
+        border: 2px solid;
+        border-radius: 1px;
+        transition: 0.2s;
+    }
+    .login:hover { background: rgba(255,255,255,.2); }
+    .login:active { background: white; }
 </style>
 </head>
 <body>
@@ -413,7 +427,7 @@
         <th scope="col">Company name</th>
         <th scope="col">Teacher</th>
         <th scope="col">Update</th>
-        <th scope="col">Delete</th>
+        <th scope="col" sec:authorize="hasAuthority('ADMIN')">Delete</th>
 
     </tr>
     </thead>
@@ -432,15 +446,17 @@
     </tbody>
 
 </table>
-<a href="/courses/addCourse"><span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover">
+<a href="/courses/addCourse" sec:authorize="hasAuthority('ADMIN')"><span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover">
     <button class="btn btn-primary" type="button" disabled>add course</button></span></a>
 <p>      <a class="hello" href="/courses/hello" >   </a> </p>
+<p>  <a class="login" href="/login" >log out </a > </p>
+
 </body>
 <section class="header-content">
-    <a class="company" href="/companies"><button  type="button" >Companies</button></a>
+    <a class="company" href="/companies" sec:authorize="hasAuthority('ADMIN')"><button  type="button" >Companies</button></a>
     <a class="group" href="/groups"><button  type="button" >Groups</button></a>
     <a class="student" href="/students"><button  type="button" >Students</button></a>
-    <a class="teacher" href="/teachers"><button  type="button" >Teachers</button></a>
+    <a class="teacher" href="/teachers" sec:authorize="hasAuthority('ADMIN')"><button  type="button" >Teachers</button></a>
     <button th:href="@{/courses/updateCourse}" value="update" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" ></button>
     <button th:href="@{/courses/addCourse}" value="ADD" sec:authorize="hasAuthority('ADMIN')" ></button>
 </section>

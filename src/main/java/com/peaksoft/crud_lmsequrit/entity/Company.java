@@ -22,6 +22,5 @@ public class Company {
     private String locatedCountry;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "company")
     private List<Course> courses;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "company")
-    private List<Student> students;
+
 }

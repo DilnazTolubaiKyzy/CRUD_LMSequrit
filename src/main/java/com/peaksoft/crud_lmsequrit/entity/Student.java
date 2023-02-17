@@ -28,8 +28,6 @@ public class Student {
     @ManyToOne(cascade ={CascadeType.REFRESH,CascadeType.MERGE})
     @JoinColumn(name = "group_id")
     private Group group;
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "company_id")
-    private Company company;
+
 
 }

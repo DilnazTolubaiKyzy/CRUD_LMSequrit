@@ -129,6 +129,21 @@
             background: #D1C7BF;
             font-weight: bold;
         }
+
+        .login {
+            display: inline-block;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            user-select: none;
+            padding: .5em 2em;
+            outline: none;
+            border: 2px solid;
+            border-radius: 1px;
+            transition: 0.2s;
+        }
+        .login:hover { background: rgba(255,255,255,.2); }
+        .login:active { background: white; }
     </style>
 </head>
 <body>
@@ -168,6 +183,7 @@
   <button class="btn btn-primary" type="button" disabled>add company</button>
 </span></a>
   <p>  <a class="hello" href="/companies/hello" > </a > </p>
+  <p>  <a class="login" href="/login" >log out </a > </p>
 
 <div class="bg"></div>
 <div class="bg bg2"></div>

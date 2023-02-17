@@ -26,53 +26,103 @@
                     0 2px 4px rgba(0,0,0,.9);
         }
 
-        body {
-            background: #fff;
-        }
-
-        .students {
-            font-size: 2.5rem;
-            font-family: 'Lobster', cursive;
-        }
-
-        .wrapper {
-            animation: scroll 70s linear infinite;
-            background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80"), #111111;
-            color: #eee;
+        .background {
+            width: 100vw;
             height: 100vh;
-            min-width: 360px;
-            width: 100%;
+            animation: pulse 5s infinite;
+            overflow: hidden;
+        }
+
+        body {
+           background: #d10053;
+            background: #cc145e;
+            background: #d10053;
+        }
+
+        .background p {
+            z-index: 999;
+            margin: 0;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-family: lato;
+            font-size: 70px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%);
+        }
+
+        .elements {
+            height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-flow: row nowrap;
+            justify-content: space-around;
             align-items: center;
-            perspective: 1000px;
-            perspective-origin: 50% 50%;
-
         }
 
-        @keyframes scroll {
-            100%{
-                background-position:0px -3000px;
+        /* ====================
+              Squares
+        =======================*/
+
+        .square {
+            border: 10px dashed #db0f60;
+        }
+
+        .sq2{
+            animation: move1 180s infinite;
+            animation-timing-function: linear;
+            width: 1110px;
+            height: 1110px;
+        }
+
+        @keyframes move1 {
+            0% {
+                transform: rotate(0deg);
+                opacity: 0.5;
+            }
+
+            50% {
+                width: 1000px;
+                height: 1000px;
+            }
+
+            100% {
+                transform: rotate(1000deg);
+                opacity: 1;
             }
         }
 
-        @media (prefers-reduced-motion) {
-            .wrapper {
-                animation: scroll 200s linear infinite;
-            }
+        .sq3 {
+            width: 600px;
+            height: 600px;
+            animation: move1 120s infinite;
+            animation-timing-function: linear;
         }
 
-        @media (min-width: 670px) {
-            .students {
-                font-size: 5rem;
-            }
+        .sq1 {
+            width: 500px;
+            height: 500px;
+            animation: move1 100s infinite;
+            animation-timing-function: linear;
         }
-        .table{
-            background-color: #D7D4E4;
+        .login {
+            display: inline-block;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            user-select: none;
+            padding: .5em 2em;
+            outline: none;
+            border: 2px solid;
+            border-radius: 1px;
+            transition: 0.2s;
         }
+        .login:hover { background: rgba(255,255,255,.2); }
+        .login:active { background: white; }
     </style>
 </head>
 <body>
+
 <header>
     <ul class="students">
         <h1> Student </h1>
@@ -88,8 +138,8 @@
         <th scope="col">email</th>
         <th scope="col">Study format</th>
         <th scope="col">Groups</th>
-        <th scope="col">Update</th>
-        <th scope="col">Delete</th>
+        <th scope="col" sec:authorize="hasAuthority('ADMIN')">Update</th>
+        <th scope="col" sec:authorize="hasAuthority('ADMIN')">Delete</th>
 
     </tr>
     </thead>
@@ -108,18 +158,26 @@
     </tr>
     </tbody>
 </table>
-<a href="/students/addStudent"><span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover">
-  <button class="btn btn-primary" type="button" disabled>students</button>
+<a href="/students/addStudent" sec:authorize="hasAuthority('ADMIN')"><span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover">
+  <button class="btn btn-primary" type="button" disabled>add students</button>
 </span></a>
 <p>      <a class="hello" href="/students/hello" >  </a >       </p>
+    <p>  <a class="login" href="/login" >log out </a > </p>
     <section class="header-content">
-        <a class="company" href="/companies"><button  type="button" >Companies</button></a>
+        <a class="company" href="/companies" sec:authorize="hasAuthority('ADMIN')"><button  type="button" >Companies</button></a>
         <a class="course" href="/courses"><button  type="button" >Courses</button></a>
         <a class="group" href="/groups"><button  type="button" >Groups</button></a>
-        <a class="teacher" href="/teachers"><button  type="button" >Teachers</button></a>
+        <a class="teacher" href="/teachers" sec:authorize="hasAuthority('ADMIN')"><button  type="button" >Teachers</button></a>
         <button th:href="@{/students/addStudent}" value="ADD" sec:authorize="hasAuthority('ADMIN')" ></button>
-        <button th:href="@{/students/updateStudent}" value="update" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" ></button>
+        <button th:href="@{/students/updateStudent}" value="update" sec:authorize="hasAuthority('ADMIN')" ></button>
     </section>
 </article>
+<div class="background">
+    <div class="elements">
+        <div class="square sq1"></div>
+        <div class="square sq2"></div>
+        <div class="square sq3"></div>
+    </div>
+</div>
 </body>
 </html>

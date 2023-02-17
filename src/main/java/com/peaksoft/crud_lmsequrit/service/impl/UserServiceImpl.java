@@ -36,11 +36,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(Long id, User user) {
+    public void update(Long id, User user,String roleName) {
      User user1 = userRepository.getById(id);
      user1.setUsername(user.getUsername());
-     user1.setPassword(user.getPassword());
-     user1.setRoles(user.getRoles());
+     user1.setLastName(user.getLastName());
+     user1.setEmail(user.getEmail());
+     user1.setAge(user.getAge());
+     user1.setPassword(passwordEncoder.encode(user.getPassword()));
+     Role role = roleRepository.getUserByRoleName(roleName);
+     Set<Role> roles = new HashSet<>();
+     roles.add(role);
+     user1.setRoles(roles);
      userRepository.save(user1);
 
     }
@@ -56,7 +62,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUserName(String username) {
-        return userRepository.getUserByUserName(username);
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
     }
+
+    @Override
+    public Set<Role> getRolesByUserId(Long id) {
+        return userRepository.getRolesByUserId(id);
+    }
+
+    @Override
+    public void delete(User user) {
+        userRepository.delete(user);
+    }
+
+
 }
