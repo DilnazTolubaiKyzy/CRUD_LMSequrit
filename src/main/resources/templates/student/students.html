@@ -151,7 +151,7 @@
         <td th:text="${student.email}"></td>
         <td th:text="${student.studyFormat}"></td>
         <td><a th:href="@{/students/groups/{id}(id=${student.getId()})}">group</a></td>
-        <td><a th:href="@{/students/update/{id}(id=${student.getId()})}">update</a></td>
+        <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/students/update/{id}(id=${student.getId()})}">update</a></td>
         <td sec:authorize="hasAuthority('ADMIN')">
             <form th:method="post" th:action="@{/students/delete/{id}(id=${student.getId()})}"
                   ><input type="submit" value="delete"></form></td>

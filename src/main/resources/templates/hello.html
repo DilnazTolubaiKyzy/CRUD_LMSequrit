@@ -183,6 +183,20 @@
             opacity: 0;
         }
     }
+    .login {
+        display: inline-block;
+        color: white;
+        font-weight: 700;
+        text-decoration: none;
+        user-select: none;
+        padding: .5em 2em;
+        outline: none;
+        border: 2px solid;
+        border-radius: 1px;
+        transition: 0.2s;
+    }
+    .login:hover { background: rgba(255,255,255,.2); }
+    .login:active { background: white; }
 
 </style>
 
@@ -211,6 +225,7 @@
         <a class="teacher" href="/teachers"sec:authorize="hasAuthority('ADMIN')"><button  type="button" >Teachers</button></a>
         <a class="user" href="/users" sec:authorize="hasAuthority('ADMIN')"><button  type="button"> Users </button></a>
         <a class="user" href="/profile" sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR','USER')"><button  type="button"> Profile </button></a>
+        <p>  <a class="login" href="/login" > log out</a > </p>
     </section>
 </header></div>
 </body>
